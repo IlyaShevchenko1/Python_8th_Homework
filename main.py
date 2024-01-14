@@ -13,11 +13,14 @@ from os.path import exists
 class LenNumberError:
     def __init__(self, txt):
         self.txt = txt
+class LenFirstNameError:
+    def __init__(self, txt):
+        self.txt = txt
 
 def get_info():
-    first_name = "Ivan"
     second_name = "Ivanov"
     is_valid_number = False
+    is_valid_first_name = False
     while not is_valid_number:
         try:
             phone_number = int(input('Введите номер: '))
@@ -29,6 +32,19 @@ def get_info():
             print('Невалидный номер')
             continue
         except LenNumberError as err:
+            print(err)
+            continue
+    while not is_valid_first_name:
+        try:
+            first_name = str(input('Введите имя: '))
+            if len(first_name) < 2:
+                raise LenFirsNameError('Невалидное имя')
+            else:
+                is_valid_first_name = True
+        except ValueError:
+            print('Невалидное имя')
+            continue
+        except LenFirstNameError as err:
             print(err)
             continue
 
@@ -119,4 +135,3 @@ def main():
 
 main()
         
-
